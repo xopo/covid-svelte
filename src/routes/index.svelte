@@ -5,8 +5,14 @@
 </script>
 
 <svelte:head>
-	<title>Covid project</title>
+	<title>About Covid 19 Tracker US</title>
 </svelte:head>
+
+<div class="section header">
+	<div class="container">
+		<h1>Covid 19 - US</h1>
+	</div>
+</div>
 
 <CovidStats/>
 <CovidChart/>
