@@ -1,56 +1,44 @@
 <script>
+	let isOpen = false;
 	export let segment;
+
+	const toggleOpen = () => isOpen = !isOpen;
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
+	@media screen and (min-width: 769px) {
+		nav {
+			border-bottom: solid gray 1px;
+		}
+		a.is-active {
+			background-color: #fafafa;
+    		color: #3273dc;
+		}
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
-
-	li {
-		display: block;
-		float: left;
-	}
-
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
 	}
 </style>
-
-<nav>
-	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
-	</ul>
+{segment}
+<nav class="navbar" role='navigation' aria-label='mainnavigation'>
+	<div class="navbar-brand">
+		<a href="/" class="navbar-item">
+			<img src="covid_logo.jpg" alt="covid logo">
+		</a> 
+		<span
+			class='navbar-burger'
+			aria-label='menu'
+			aria-expanded='false'
+			class:is-active={isOpen}
+			on:click={toggleOpen}
+			>
+			<span aria-hidden='true'></span>
+			<span aria-hidden='true'></span>
+			<span aria-hidden='true'></span>
+		</span>
+	</div>
+	<div class="navbar-menu" class:is-active={isOpen}>
+		<div class="navbar-start">
+			<a href="/" class="navbar-item" class:is-active={segment === undefined}>Home</a>
+			<a href="/about" class="navbar-item" class:is-active={segment === 'about'}>About</a>
+		</div>
+	</div>
 </nav>
