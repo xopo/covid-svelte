@@ -1,0 +1,9 @@
+<script>
+</script>
+<table>
+    <thead>
+        <tr>
+            <th>Table</th>
+        </tr>
+    </thead>
+</table>
