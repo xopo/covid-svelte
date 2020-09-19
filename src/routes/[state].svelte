@@ -1,14 +1,17 @@
 <script context='module'>
     import stateNames from '../data/stateNames.js';
-
+    import { getStatesStats } from '../data/requests';
+ 
     export async function preload({params: { state }}) {
         const targetState = stateNames.find(item => item.name === state || item.abbreviation === state);
         if (!targetState) {
             this.error(404, 'State not found');
             return;
         }
+
+        const data = await getStatesStats(targetState)
          
-        return { state: targetState };
+        return { state: targetState, data };
     }
 </script>
 
@@ -18,7 +21,8 @@
     import TableContainer from '../components/TableContainer.svelte';
     
     export let state;
-    
+    export let data;
+    console.log({data})
 </script>
 
 <svelte:head>
@@ -27,12 +31,12 @@
 
 <div class="section header">
 	<div class="container">
-		<h1>Covid 19 - US State</h1>
+		<h1>Covid 19 - US {state.name} State</h1>
 	</div>
 </div>
 
 
 
 <h3>{state.name} - display chart and stats based on the state</h3>
-<CovidStats/>
+<CovidStats {...data}/>
 <CovidChart/>

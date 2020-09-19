@@ -1,9 +1,8 @@
 import format from './format.js';
 import moment from 'moment';
 
-function usStats(data) {
-    const [result ] = data;
-
+function usStats(result) {
+    
     return {
         cases: format.number(result.positive),
         negative: format.number(result.negative),
