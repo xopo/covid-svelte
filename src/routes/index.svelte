@@ -28,6 +28,6 @@
 	</div>
 </div>
 
-<CovidStats/>
+<CovidStats {...data}/>
 <CovidChart/>
 <TableContainer/>

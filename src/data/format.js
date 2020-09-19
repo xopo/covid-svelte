@@ -3,7 +3,7 @@ function number(num) {
         return 'unknown';
     }
 
-    return num.toString();
+    return num.toLocaleString();
 }
 
 export default {
