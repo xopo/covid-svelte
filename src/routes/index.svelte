@@ -1,9 +1,10 @@
 <script context="module">
-	import usStats from '../data/requests.js';
+	import parseStats, { getHistorycData } from '../data/requests.js';
 	export async function preload() {
 		try {
-			const data = await usStats();
-			return { data }
+			const data = await parseStats();
+			const historicData = await getHistorycData();
+			return { data, historicData }
 		} catch(er) {
 			console.log({er})
 		}
@@ -12,10 +13,12 @@
 
 <script> 
 	export let data;
+	export let historicData;
+	console.log({historicData})
 	import CovidChart from '../components/CovidChart.svelte';
 	import CovidStats from '../components/CovidStats.svelte';
 	import TableContainer from '../components/TableContainer.svelte';
-	console.log('---', {data})
+import About from './about.svelte';
 </script>
 
 <svelte:head>
@@ -29,5 +32,5 @@
 </div>
 
 <CovidStats {...data}/>
-<CovidChart/>
+<CovidChart {historicData}/>
 <TableContainer/>

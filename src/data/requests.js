@@ -1,40 +1,40 @@
 import axios from 'axios';
 import parser from './parsers';
 
-const url = 'https://api.covidtracking.com/v1/#placeholder#/current.json'
 const placeholder = {
     us: 'us',
     states: 'states'
 };
-
+const apiBase = 'https://api.covidtracking.com/api/v1/'; 
+const url = `${apiBase}#placeholder#/current.json`;
 const getUrl = (placeholder) => url.replace('#placeholder#', placeholder);
-
 const api_url = {
     us: getUrl(placeholder.us),
-    states: getUrl(placeholder.states)
+    states: getUrl(placeholder.states),
+    historyUrl: `${apiBase}us/daily.json`
 }
 
-
-export default async function usStats(apiUrl=api_url.us) {
-    console.log({apiUrl});
-
+export default async function parseStats(apiUrl=api_url.us) {
     const {data: [ result ]} = await axios.get(apiUrl);
-    return parser.usStats(result);
+
+    return parser.parseStats(result);
+}
+
+export async function getHistorycData(apiUrl=api_url.historyUrl) {
+    const result = await axios.get(apiUrl);
+    console.log({result})
+    return parser.historicUs(result.data);
 }
 
 
 
 async function getStatesStatistics(apiUrl=api_url.states) {
-    console.log({apiUrl});
     return await axios.get(apiUrl);
 }
 
 export async function getStatesStats(state) {
-    console.log({state})
-    
     const response = await getStatesStatistics();
     const stateStat = response.data.find(s => s.state === state.abbreviation);
 
-    console.log({stateStat})
-    return parser.usStats(stateStat);
+    return parser.parseStats(stateStat);
 }
