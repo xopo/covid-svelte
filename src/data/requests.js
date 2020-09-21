@@ -22,7 +22,7 @@ export default async function parseStats(apiUrl=api_url.us) {
 
 export async function getHistorycData(apiUrl=api_url.historyUrl) {
     const result = await axios.get(apiUrl);
-    console.log({result})
+    
     return parser.historicUs(result.data);
 }
 

@@ -14,7 +14,7 @@
 <script> 
 	export let data;
 	export let historicData;
-	console.log({historicData})
+	
 	import CovidChart from '../components/CovidChart.svelte';
 	import CovidStats from '../components/CovidStats.svelte';
 	import TableContainer from '../components/TableContainer.svelte';
@@ -32,5 +32,5 @@ import About from './about.svelte';
 </div>
 
 <CovidStats {...data}/>
-<CovidChart {historicData}/>
+<CovidChart {historicData} title='Some title'/>
 <TableContainer/>

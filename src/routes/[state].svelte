@@ -22,7 +22,6 @@
     
     export let state;
     export let data;
-    console.log({data})
 </script>
 
 <svelte:head>
