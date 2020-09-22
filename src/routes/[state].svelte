@@ -1,17 +1,23 @@
 <script context='module'>
     import stateNames from '../data/stateNames.js';
-    import { getStatesStats } from '../data/requests';
+    import { getStatesStats, getStateHistoricData } from '../data/requests';
  
     export async function preload({params: { state }}) {
         const targetState = stateNames.find(item => item.name === state || item.abbreviation === state);
         if (!targetState) {
+            console.log({state, targetState})
             this.error(404, 'State not found');
             return;
         }
 
         const data = await getStatesStats(targetState)
+        const historicData = await getStateHistoricData(targetState.abbreviation);
          
-        return { state: targetState, data };
+        return { 
+            data, 
+            historicData, 
+            state: targetState, 
+        };
     }
 </script>
 
@@ -22,6 +28,7 @@
     
     export let state;
     export let data;
+    export let historicData;
 </script>
 
 <svelte:head>
@@ -38,4 +45,4 @@
 
 <h3>{state.name} - display chart and stats based on the state</h3>
 <CovidStats {...data}/>
-<CovidChart/>
+<CovidChart {historicData} title={`${state} - chart`}/>

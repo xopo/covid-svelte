@@ -6,12 +6,14 @@ const placeholder = {
     states: 'states'
 };
 const apiBase = 'https://api.covidtracking.com/api/v1/'; 
-const url = `${apiBase}#placeholder#/current.json`;
-const getUrl = (placeholder) => url.replace('#placeholder#', placeholder);
+const currentUrl = `${apiBase}#placeholder#/current.json`;
+const dailyUrl = `${apiBase}#placeholder#/#state#/daily.json`;
+const getUrl = (url, placeholder) => url.replace('#placeholder#', placeholder);
 const api_url = {
-    us: getUrl(placeholder.us),
-    states: getUrl(placeholder.states),
-    historyUrl: `${apiBase}us/daily.json`
+    us: getUrl(currentUrl, placeholder.us),
+    states: getUrl(currentUrl, placeholder.states),
+    historyUs: getUrl(dailyUrl, placeholder.us),
+    historyStates: getUrl(dailyUrl, placeholder.states)
 }
 
 export default async function parseStats(apiUrl=api_url.us) {
@@ -20,8 +22,17 @@ export default async function parseStats(apiUrl=api_url.us) {
     return parser.parseStats(result);
 }
 
-export async function getHistorycData(apiUrl=api_url.historyUrl) {
-    const result = await axios.get(apiUrl);
+export async function getHistorycData(apiUrl=api_url.historyUs) {
+    const updatedUrl = apiUrl.replace('#state#', '');
+    const result = await axios.get(updatedUrl);
+    
+    return parser.historicUs(result.data);
+}
+
+export async function getStateHistoricData(state, apiUrl=api_url.historyStates) {
+    const updatedUrl = apiUrl.replace('#state#', state);
+    console.log({updatedUrl})
+    const result = await axios.get(updatedUrl);
     
     return parser.historicUs(result.data);
 }
