@@ -27,6 +27,7 @@
     import TableContainer from '../components/TableContainer.svelte';
     
     export let state;
+    const { name } = state;
     export let data;
     export let historicData;
 </script>
@@ -37,12 +38,12 @@
 
 <div class="section header">
 	<div class="container">
-		<h1>Covid 19 - US {state.name} State</h1>
+		<h1>Covid 19 - US {name} State</h1>
 	</div>
 </div>
 
 
 
-<h3>{state.name} - display chart and stats based on the state</h3>
+<h3>{name} - display chart and stats based on the state</h3>
 <CovidStats {...data}/>
-<CovidChart {historicData} title={`${state} - chart`}/>
+<CovidChart {historicData} title={`${name} - chart`}/>

@@ -5,10 +5,13 @@ const placeholder = {
     us: 'us',
     states: 'states'
 };
+
 const apiBase = 'https://api.covidtracking.com/api/v1/'; 
 const currentUrl = `${apiBase}#placeholder#/current.json`;
 const dailyUrl = `${apiBase}#placeholder#/#state#/daily.json`;
+
 const getUrl = (url, placeholder) => url.replace('#placeholder#', placeholder);
+
 const api_url = {
     us: getUrl(currentUrl, placeholder.us),
     states: getUrl(currentUrl, placeholder.states),
@@ -24,17 +27,16 @@ export default async function parseStats(apiUrl=api_url.us) {
 
 export async function getHistorycData(apiUrl=api_url.historyUs) {
     const updatedUrl = apiUrl.replace('#state#', '');
-    const result = await axios.get(updatedUrl);
+    const { data } = await axios.get(updatedUrl);
     
-    return parser.historicUs(result.data);
+    return parser.historicUs(data);
 }
 
 export async function getStateHistoricData(state, apiUrl=api_url.historyStates) {
     const updatedUrl = apiUrl.replace('#state#', state);
-    console.log({updatedUrl})
-    const result = await axios.get(updatedUrl);
+    const { data } = await axios.get(updatedUrl);
     
-    return parser.historicUs(result.data);
+    return parser.historicUs(data);
 }
 
 
@@ -44,8 +46,8 @@ async function getStatesStatistics(apiUrl=api_url.states) {
 }
 
 export async function getStatesStats(state) {
-    const response = await getStatesStatistics();
-    const stateStat = response.data.find(s => s.state === state.abbreviation);
+    const { data } = await getStatesStatistics();
+    const stateStat = data.find(s => s.state === state.abbreviation);
 
     return parser.parseStats(stateStat);
 }
