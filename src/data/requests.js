@@ -1,14 +1,18 @@
-import axios from 'axios';
+import { setup } from 'axios-cache-adapter';
 import parser from './parsers';
+
+const axios = setup({
+    baseURL: 'https://api.covidtracking.com/api/v1/',
+    cache: { maxAge: 5 * 1000 }
+});
 
 const placeholder = {
     us: 'us',
     states: 'states'
 };
 
-const apiBase = 'https://api.covidtracking.com/api/v1/'; 
-const currentUrl = `${apiBase}#placeholder#/current.json`;
-const dailyUrl = `${apiBase}#placeholder#/#state#/daily.json`;
+const currentUrl = `#placeholder#/current.json`;
+const dailyUrl = `#placeholder#/#state#/daily.json`;
 
 const getUrl = (url, placeholder) => url.replace('#placeholder#', placeholder);
 
@@ -19,7 +23,13 @@ const api_url = {
     historyStates: getUrl(dailyUrl, placeholder.states)
 }
 
-export default async function parseStats(apiUrl=api_url.us) {
+export async function getStatesData(apiUrl=api_url.states) {
+    const { data } = await axios.get(apiUrl);
+
+    return parser.mapStatesByState(data);
+}
+
+export default async function getStats(apiUrl=api_url.us) {
     const {data: [ result ]} = await axios.get(apiUrl);
 
     return parser.parseStats(result);

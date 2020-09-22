@@ -80,8 +80,7 @@
         }
     });
     console.log({title, historicData})
-</script>
-<h3>Chart { hideChart }</h3>
+</script> 
 {#if !hideChart}
 <div class="container">
     <canvas bind:this={chartElement}></canvas>

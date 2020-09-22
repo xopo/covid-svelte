@@ -17,7 +17,6 @@
 
 	}
 </style>
-{segment}
 <nav class="navbar" role='navigation' aria-label='mainnavigation'>
 	<div class="navbar-brand">
 		<a href="/" class="navbar-item">

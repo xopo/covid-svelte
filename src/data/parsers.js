@@ -1,5 +1,6 @@
 import format from './format.js';
 import moment from 'moment';
+import states from './stateNames';
 
 function parseStats(result) {
     
@@ -52,7 +53,6 @@ const historicUs = historicData => ([
     if (historicData.filter(h => h[key] !== null).length > 4) {
         prev.push(parseHistoricData(historicData, key, label, color))
     }
-    console.log({key, label, prev})
     return prev;
 }, []));
 
@@ -70,8 +70,25 @@ function parseHistoricData(historyItems, key, label, borderColor) {
     });
 }
 
+function mapStatesByState(data) {
+    const acc = [];
+    data.forEach(entry => {
+        const obj = {
+            name: states.find(state => state.abbreviation === entry.state).name,
+            state: entry.state,
+            cases: entry.totalTestEncountersViral,
+            deaths: entry.death,
+            totalTested: entry.totalTestResults
+        }
+
+        acc.push(obj);
+    })
+    return acc;
+}
+
 export default {
+    historicUs,
+    mapStatesByState,
     parseStats,
-    parseHistoricData,
-    historicUs
+    parseHistoricData
 }

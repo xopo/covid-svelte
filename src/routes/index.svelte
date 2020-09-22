@@ -1,10 +1,15 @@
 <script context="module">
-	import parseStats, { getHistorycData } from '../data/requests.js';
+	import getStats, { getHistorycData, getStatesData } from '../data/requests.js';
 	export async function preload() {
 		try {
-			const data = await parseStats();
+			const data = await getStats();
 			const historicData = await getHistorycData();
-			return { data, historicData }
+			const statesData = await getStatesData();
+			return { 
+				data, 
+				historicData,
+				statesData
+			}
 		} catch(er) {
 			console.log({er})
 		}
@@ -12,8 +17,7 @@
 </script>
 
 <script> 
-	export let data;
-	export let historicData;
+	export let data, historicData, statesData;
 	
 	import CovidChart from '../components/CovidChart.svelte';
 	import CovidStats from '../components/CovidStats.svelte';
@@ -33,4 +37,4 @@ import About from './about.svelte';
 
 <CovidStats {...data}/>
 <CovidChart {historicData} title='Some title'/>
-<TableContainer/>
+<TableContainer {statesData}/>
