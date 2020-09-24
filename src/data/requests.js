@@ -29,9 +29,9 @@ export async function getStatesData(apiUrl=api_url.states) {
     return parser.mapStatesByState(data);
 }
 
-export default async function getStats(apiUrl=api_url.us) {
+export async function getStats(apiUrl=api_url.us) {
     const {data: [ result ]} = await axios.get(apiUrl);
-
+    
     return parser.parseStats(result);
 }
 

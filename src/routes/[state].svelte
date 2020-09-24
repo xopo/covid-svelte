@@ -1,6 +1,7 @@
 <script context='module'>
     import stateNames from '../data/stateNames.js';
     import { getStatesStats, getStateHistoricData } from '../data/requests';
+    import Table from '../components/Table.svelte';
  
     export async function preload({params: { state }}) {
         const targetState = stateNames.find(item => item.name === state || item.abbreviation === state);

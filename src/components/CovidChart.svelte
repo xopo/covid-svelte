@@ -6,7 +6,6 @@
     export let title;
 
     let hideChart = false;
-
     let chartElement;
     let chart;
 
@@ -79,7 +78,8 @@
             chart.destroy();
         }
     });
-    console.log({title, historicData})
+    
+
 </script> 
 {#if !hideChart}
 <div class="container">

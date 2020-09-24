@@ -1,12 +1,13 @@
 <script context="module">
-	import getStats, { getHistorycData, getStatesData } from '../data/requests.js';
+	import {getStats, getHistorycData, getStatesData } from '../data/requests.js';
 	export async function preload() {
 		try {
-			const data = await getStats();
+			const todayData = await getStats();
 			const historicData = await getHistorycData();
 			const statesData = await getStatesData();
+			
 			return { 
-				data, 
+				todayData, 
 				historicData,
 				statesData
 			}
@@ -17,12 +18,14 @@
 </script>
 
 <script> 
-	export let data, historicData, statesData;
+	export let todayData;
+	export let historicData;
+	export let statesData;
+	// console.log({todayData, historicData: historicData.length, statesData: statesData.length})
 	
 	import CovidChart from '../components/CovidChart.svelte';
 	import CovidStats from '../components/CovidStats.svelte';
 	import TableContainer from '../components/TableContainer.svelte';
-import About from './about.svelte';
 </script>
 
 <svelte:head>
@@ -35,6 +38,6 @@ import About from './about.svelte';
 	</div>
 </div>
 
-<CovidStats {...data}/>
+<CovidStats {...todayData}/>
 <CovidChart {historicData} title='Some title'/>
 <TableContainer {statesData}/>

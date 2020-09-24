@@ -31,7 +31,6 @@ export default {
 				hydratable: true,
 				emitCss: true
 			}),
-			css({ output: 'static/extra.css' }),
 			resolve({
 				browser: true,
 				dedupe: ['svelte']
@@ -77,6 +76,7 @@ export default {
 				hydratable: true,
 				dev
 			}),
+			css({ output: 'static/extra.css' }),
 			resolve({
 				dedupe: ['svelte']
 			}),

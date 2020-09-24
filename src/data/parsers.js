@@ -2,20 +2,27 @@ import format from './format.js';
 import moment from 'moment';
 import states from './stateNames';
 
-function parseStats(result) {
-    
-    return {
-        cases: format.number(result.positive),
-        negative: format.number(result.negative),
-        death: format.number(result.death),
-        recovered: format.number(result.recovered), 
-        hospitalized: format.number(result.hospitalized),
-        ventilator: format.number(result.onVentilatorCurrently),
-        icu: format.number(result.inIcuCumulative),
-        tested: format.number(result.totalTestResults),
-        updated: moment(result.lastModified).format('LLLL')
-    }
-}
+const parseStats = ({
+        death, 
+        inIcuCumulative, 
+        lastModified, 
+        hospitalized, 
+        onVentilatorCurrently, 
+        negative, 
+        positive, 
+        recovered, 
+        totalTestResults
+    }) => ({
+    cases: format.number(positive),
+    negative: format.number(negative),
+    death: format.number(death),
+    recovered: format.number(recovered), 
+    hospitalized: format.number(hospitalized),
+    ventilator: format.number(onVentilatorCurrently),
+    icu: format.number(inIcuCumulative),
+    tested: format.number(totalTestResults),
+    updated: moment(lastModified).format('LLLL')
+});
 
 const historicUs = historicData => ([
     {
@@ -75,10 +82,10 @@ function mapStatesByState(data) {
     data.forEach(entry => {
         const obj = {
             name: states.find(state => state.abbreviation === entry.state).name,
-            state: entry.state,
-            cases: entry.totalTestEncountersViral,
-            deaths: entry.death,
-            totalTested: entry.totalTestResults
+            state: format.number(entry.state),
+            cases: format.number(entry.positive),
+            deaths: format.number(entry.death),
+            totalTested: format.number(entry.totalTestResults)
         }
 
         acc.push(obj);

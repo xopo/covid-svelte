@@ -10,7 +10,7 @@
 
 
 
-    console.log({statesData})
+    // console.log({statesData})
 </script>
 
 <TableFilter />
