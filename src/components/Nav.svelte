@@ -14,7 +14,17 @@
 			background-color: #fafafa;
     		color: #3273dc;
 		}
-
+		.navbar-menu {
+			display: flex;
+			flex-grow: 1;
+			flex-shrink: 0;
+		}
+		.navbar-burger {
+			display: none;
+		}
+		.navbar, .navbar-start, .navbar-menu {
+			display: flex;
+		}
 	}
 </style>
 <nav class="navbar" role='navigation' aria-label='mainnavigation'>
