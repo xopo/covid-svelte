@@ -78,11 +78,11 @@
             chart.destroy();
         }
     });
-    
-
 </script> 
 {#if !hideChart}
-<div class="container">
-    <canvas bind:this={chartElement}></canvas>
+<div class="section">
+    <div class="container">
+        <canvas bind:this={chartElement}></canvas>
+    </div>
 </div>
 {/if}
