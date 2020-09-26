@@ -5,9 +5,11 @@ import * as sapper from '@sapper/server';
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
+const baseUrl = dev ? '/' : '/covid';
 
 polka() // You can also use Express
 	.use(
+		baseUrl,
 		compression({ threshold: 0 }),
 		sirv('static', { dev }),
 		sapper.middleware()
