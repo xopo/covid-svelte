@@ -6,7 +6,6 @@
     export async function preload({params: { state }}) {
         const targetState = stateNames.find(item => item.name === state || item.abbreviation === state);
         if (!targetState) {
-            console.log({state, targetState})
             this.error(404, 'State not found');
             return;
         }

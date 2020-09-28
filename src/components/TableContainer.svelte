@@ -23,7 +23,6 @@
     }
 
     $: entries = filterAndSort(statesData, filterBy, sortBy);
-    $: console.log({filterBy, sortBy});
 </script>
 
 <TableFilter bind:filterBy bind:sortBy/>

@@ -17,7 +17,7 @@
                 {#each entries as {name, state, cases, deaths, totalTested}}
                     <tr>
                         <td>
-                            <a href={`/${state}`}>{name}</a>
+                            <a rel='prefetch' href={`/${state}`}>{name}</a>
                         </td>
                         <td>{cases}</td>
                         <td>{deaths}</td>

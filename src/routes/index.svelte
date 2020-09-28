@@ -21,7 +21,6 @@
 	export let todayData;
 	export let historicData;
 	export let statesData;
-	// console.log({todayData, historicData: historicData.length, statesData: statesData.length})
 	
 	import CovidChart from '../components/CovidChart.svelte';
 	import CovidStats from '../components/CovidStats.svelte';

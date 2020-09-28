@@ -21,7 +21,7 @@ const parseStats = ({
     ventilator: format.number(onVentilatorCurrently),
     icu: format.number(inIcuCumulative),
     tested: format.number(totalTestResults),
-    updated: moment(lastModified).format('LLLL')
+    updated: moment(lastModified).format('LT')
 });
 
 const historicUs = historicData => ([

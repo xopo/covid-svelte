@@ -38,7 +38,7 @@
 				<p>Page Not Found</p>
 			</div>
 			<div class="message-body">
-				<a href="/">Click Here</a> to go home.
+				<a rel='prefetch' href="/">Click Here</a> to go home.
 			</div>
 		</article>
 	</div>
