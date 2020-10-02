@@ -1,5 +1,5 @@
 <script>
-	import baseUrl from '../server';
+	import { parentUrl }  from '../helper';
 	export let segment;
 	let isOpen = false;
 
@@ -31,7 +31,7 @@
 </style>
 <nav class="navbar" role='navigation' aria-label='mainnavigation'>
 	<div class="navbar-brand">
-		<a href={baseUrl} class="navbar-item">
+		<a href={parentUrl} class="navbar-item">
 			<img src="covid_logo.jpg" alt="covid logo">
 		</a> 
 		<span
@@ -48,8 +48,8 @@
 	</div>
 	<div class="navbar-menu" class:is-active={isOpen}>
 		<div class="navbar-start">
-			<a rel='prefetch' href={baseUrl} class="navbar-item" class:is-active={segment === undefined}>Home</a>
-			<a rel='prefetch' href="{baseUrl}/about" class="navbar-item" class:is-active={segment === 'about'}>About</a>
+			<a rel='prefetch' href={parentUrl} class="navbar-item" class:is-active={segment === undefined}>Home</a>
+			<a rel='prefetch' href="{parentUrl}about" class="navbar-item" class:is-active={segment === 'about'}>About</a>
 		</div>
 	</div>
 </nav>

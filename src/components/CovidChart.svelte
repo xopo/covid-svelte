@@ -5,6 +5,8 @@
     export let historicData;
     export let title;
 
+    console.log({title, historicData});
+
     let hideChart = false;
     let chartElement;
     let chart;

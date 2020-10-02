@@ -1,6 +1,6 @@
 <script>
-    import baseUrl from '../server';
-    export let entries;
+    import { parentUrl }  from '../helper';
+    export let entries;  
 </script>
 
 <div class="section">
@@ -18,7 +18,7 @@
                 {#each entries as {name, state, cases, deaths, totalTested}}
                     <tr>
                         <td>
-                            <a rel='prefetch' href={`${baseUrl}/${state}`}>{name}</a>
+                            <a rel='prefetch' href={`${parentUrl}${state}`}>{name}</a>
                         </td>
                         <td>{cases}</td>
                         <td>{deaths}</td>
